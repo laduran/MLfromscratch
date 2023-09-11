@@ -28,7 +28,7 @@ class KMeans:
         # store the centers (mean vector for each cluster)
         self.centroids = []
 
-    def predict(self, X): # no y value since this is unsupervised
+    def predict(self, X: np.ndarray): # no y value since this is unsupervised
         self.X = X
         self.n_samples, self.n_features = X.shape
 
@@ -37,7 +37,7 @@ class KMeans:
         self.centroids = [self.X[idx] for idx in random_sample_idxs]
 
         # optimize clusters
-        for _ in range(self.max_iters):
+        for i in range(self.max_iters):
             # assign samples to the closest centroids (create initial clusters)
             self.clusters = self._create_clusters(self.centroids)
 
@@ -48,7 +48,8 @@ class KMeans:
             centroids_old = self.centroids
             self.centroids = self._get_centroids(self.clusters)
 
-            if self._is_converged(centroids_old, self.centroids)
+            if self._is_converged(centroids_old, self.centroids):
+                print(f"Centroids have converged to a common value after {i} steps.")
                 break
 
             if self.plot_steps:
@@ -57,10 +58,10 @@ class KMeans:
         # classify samples as the index of their clusters
         return self._get_cluster_labels(self.clusters)
     
-    def _get_cluster_labels(self, clusters):
+    def _get_cluster_labels(self, clusters) -> np.ndarray:
         # each sample will get the label of thecluster it was assigned to
         labels = np.empty(self.n_samples)
-        for cluster_idx, cluster in enumerate(cluster):
+        for cluster_idx, cluster in enumerate(clusters):
             for sample_idx in cluster:
                 labels[sample_idx] = cluster_idx
 
@@ -81,13 +82,25 @@ class KMeans:
         return closest_idx
 
     def _get_centroids(self, clusters):
-        pass
+        # assign the mean value of the clusters to the centroids
+        centroids = np.zeros((self.K, self.n_features))
+        for cluster_idx, cluster in enumerate(clusters):
+            cluster_mean = np.mean(self.X[cluster], axis=0)
+            centroids[cluster_idx] = cluster_mean
+            return centroids
 
     def _is_converged(self, centroids_old, centroids):
-        pass
+        # check distances between old and new centroids for all centroids
+        distances = [euclidean_distance(centroids_old[i], centroids[i]) for i in range(self.K)]
+        return sum(distances) == 0
 
     def plot(self):
-        pass
+        _, ax = plt.subplots(figsize=(12, 8))
+        for i, index in enumerate(self.clusters):
+            point = self.X[index].T
+            ax.scatter(*point)
 
-    def _get_cluster_labels():
-        pass
+        for point in self.centroids:
+            ax.scatter(*point, marker="x", color="black", linewidth=2)
+
+        plt.show()
