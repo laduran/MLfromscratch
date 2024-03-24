@@ -17,10 +17,34 @@ plt.figure()
 plt.scatter(X[:,2],X[:,3], c=y, cmap=cmap, edgecolor='k', s=20)
 plt.show()
 
+# Train with KNN default euclidean distance metric
 clf = KNN(k=5)
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
-print(predictions)
+#print(predictions)
+acc = np.sum(predictions == y_test) / len(y_test)
+print(acc)
 
+# Train with KNN using the minkowski distance metric
+clf = KNN(k=5, distance='minkowski')
+clf.fit(X_train, y_train)
+predictions = clf.predict(X_test)
+#print(predictions)
+acc = np.sum(predictions == y_test) / len(y_test)
+print(acc)
+
+# Train with KNN using the manhattan distance metric
+clf = KNN(k=5, distance='manhattan')
+clf.fit(X_train, y_train)
+predictions = clf.predict(X_test)
+#print(predictions)
+acc = np.sum(predictions == y_test) / len(y_test)
+print(acc)
+
+# Train with KNN using the cosine distance metric
+clf = KNN(k=5, distance='cosine')
+clf.fit(X_train, y_train)
+predictions = clf.predict(X_test)
+#print(predictions)
 acc = np.sum(predictions == y_test) / len(y_test)
 print(acc)
