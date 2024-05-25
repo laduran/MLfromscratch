@@ -6,7 +6,7 @@ class SupportVectorMachine:
 
     def __init__(self, learning_rate=0.001, lambda_param=0.01, n_iters=1000) -> None:
         self.lr = learning_rate
-        self.lambra_param = lambda_param
+        self.lambda_param = lambda_param
         self.n_iters = n_iters
         self.w = None   #weights
         self.b = None   #biases
@@ -23,9 +23,9 @@ class SupportVectorMachine:
             for idx, x_i in enumerate(X):
                 condition = y_[idx] * (np.dot(x_i, self.w) - self.b) >= 1
                 if condition:
-                    self.w -= self.lr * (2 * self.lambra_param * self.w)
+                    self.w -= self.lr * (2 * self.lambda_param * self.w)
                 else:
-                    self.w -= self.lr * (2 * self.lambra_param * self.w - np.dot(x_i, y_[idx]))
+                    self.w -= self.lr * (2 * self.lambda_param * self.w - np.dot(x_i, y_[idx]))
                     self.b -= self.lr * y_[idx]
 
     def predict(self, X: np.ndarray):
