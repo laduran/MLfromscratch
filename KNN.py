@@ -40,8 +40,6 @@ class KNN:
             distances = [cosine_distance(x, x_train) for x_train in self.X_train]
         else:
             raise ValueError('Invalid distance metric')
-        
-        distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
 
         #get the closest K
         k_indices = np.argsort(distances)[:self.k]

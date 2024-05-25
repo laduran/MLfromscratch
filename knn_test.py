@@ -23,7 +23,8 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 #print(predictions)
 acc = np.sum(predictions == y_test) / len(y_test)
-print(acc)
+rmse = np.sqrt(np.mean((predictions - y_test) ** 2))
+print(f"Accuracy: {acc} and RMSE {rmse} of predictions: ")
 
 # Train with KNN using the minkowski distance metric
 clf = KNN(k=5, distance='minkowski')
@@ -31,7 +32,8 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 #print(predictions)
 acc = np.sum(predictions == y_test) / len(y_test)
-print(acc)
+rmse = np.sqrt(np.mean((predictions - y_test) ** 2))
+print(f"Accuracy: {acc} and RMSE {rmse} of predictions: ")
 
 # Train with KNN using the manhattan distance metric
 clf = KNN(k=5, distance='manhattan')
@@ -39,7 +41,8 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 #print(predictions)
 acc = np.sum(predictions == y_test) / len(y_test)
-print(acc)
+rmse = np.sqrt(np.mean((predictions - y_test) ** 2))
+print(f"Accuracy: {acc} and RMSE {rmse} of predictions: ")
 
 # Train with KNN using the cosine distance metric
 clf = KNN(k=5, distance='cosine')
@@ -47,4 +50,6 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 #print(predictions)
 acc = np.sum(predictions == y_test) / len(y_test)
-print(acc)
+# calculate the Root Mean Squared Error of the predictions
+rmse = np.sqrt(np.mean((predictions - y_test) ** 2))
+print(f"Accuracy: {acc} and RMSE {rmse} of predictions: ")

@@ -18,7 +18,7 @@ plt.scatter(X[:], y, color='b', marker='o', s=30)
 plt.show()
 
 # Default learning rate doesn't come up with an optimal fit.
-reg = LinearRegression(lr=0.1)
+reg = LinearRegression(λ=0.1)
 reg.fit(X_train, y_train)
 
 predictions = reg.predict(X_test)
@@ -31,5 +31,7 @@ cmap = plt.get_cmap('viridis')
 fig = plt.figure(figsize=(8,6))
 m1 = plt.scatter(X_train, y_train, color=cmap(0.9), s=10)
 m1 = plt.scatter(X_test, y_test, color=cmap(0.5), s=10)
-plt.plot(X, y_pred_line, color='black', linewidth=2, label='Prediction')
+plt.plot(X, y_pred_line, color='red', linewidth=2, label='Prediction')
 plt.show()
+
+print("End of linear_test.py")
